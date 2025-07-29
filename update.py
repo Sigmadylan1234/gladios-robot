@@ -2,14 +2,20 @@ import subprocess
 import os
 import sys
 
-# Get path to this repo
+# Get the folder where this script is located
 repo_dir = os.path.dirname(os.path.abspath(__file__))
-main_script = os.path.join(repo_dir, "main.py")
 
-print("🔄 Pulling latest updates from GitHub...")
+print("🔄 Updating GitHub repository in:", repo_dir)
 subprocess.run(["git", "pull"], cwd=repo_dir)
 
-# Restart the GLaDOS script after pulling
-print("🚀 Launching GLaDOS AI...")
-python_exe = sys.executable  # Path to python.exe
-subprocess.run([python_exe, main_script])
+# List of required Python packages
+required_packages = [
+    "speechrecognition",
+    "pyttsx3",
+    "pyaudio",
+    "requests"
+]
+
+print("📦 Installing required Python packages...")
+for package in required_packages:
+    subprocess.run([sys.executable, "-m", "pip", "install", package])
